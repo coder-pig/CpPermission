@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="clickListener"
+            type="cn.coderpig.cppermission.ClickHandler" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_old_request_permission_act"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="打开旧的权限申请示例Activity"
+            android:onClick="@{clickListener::showOldRequestPermissionAct}"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_new_request_permission_act"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="打开新的权限申请示例Activity"
+            android:onClick="@{clickListener::showNewRequestPermissionAct}"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_cp_permission_act"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="打开CpPermission测试Activity"
+            android:onClick="@{clickListener::showCpTestPermissionAct}"/>
+
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_request_permission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="请求单个权限"
+            android:onClick="requestPermissionClick"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_request_permissions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="请求多个权限"
+            android:onClick="requestPermissionsClick"/>
+
+    </LinearLayout>
+</layout>
