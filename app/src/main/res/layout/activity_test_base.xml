@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_request_permission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="申请单个危险权限"
+            android:onClick="click"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_request_permissions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="申请多个危险权限"
+            android:onClick="click"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_request_back_location_permission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="申请后台定位权限"
+            android:onClick="click"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_request_install_package_permission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="申请安装包权限"
+            android:onClick="click"/>
+
+    </LinearLayout>
+</layout>

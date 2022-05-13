@@ -30,7 +30,7 @@ import androidx.fragment.app.Fragment
  * @param onShowRequestRationale 描述请求原因的回调
  * */
 fun ActivityResultCaller.registerForPermissionResult(
-    onGranted: (() -> Unit)? = null,
+    onGranted: ((String) -> Unit)? = null,
     onDenied: ((IPermissionScope, String) -> Unit)? = null,
     onShowRequestRationale: ((IPermissionScope, String) -> Unit)? = null,
 ): ActivityResultLauncher<String> {
@@ -53,7 +53,7 @@ fun ActivityResultCaller.registerForPermissionResult(
         val permission = result.first
         when {
             // 已授权
-            result.second -> onGranted?.let { it -> it() }
+            result.second -> onGranted?.let { it -> it(permission) }
             // 提示授权
             permission.isNotEmpty() && ActivityCompat.shouldShowRequestPermissionRationale(
                 context(),
@@ -69,13 +69,13 @@ fun ActivityResultCaller.registerForPermissionResult(
  * 请求多个权限
  * */
 fun ActivityResultCaller.registerForPermissionsResult(
-    onAllGranted: (() -> Unit)? = null,
+    onAllGranted: ((List<String>) -> Unit)? = null,
     onDenied: ((IPermissionScope, List<String>) -> Unit)? = null,
     onShowRequestRationale: ((IPermissionScope, List<String>) -> Unit)? = null
 ): ActivityResultLauncher<Array<String>> {
     // 初始化要用到的Launcher
     val appSettingLauncher = appSettingsLauncher()
-    val backLocationLauncher = backLocationLauncher(appSettingLauncher, onAllGranted)
+    val backLocationLauncher = backLocationLauncher(appSettingLauncher) { s -> }
     val fineLocationLauncher = fineLocationLauncher(appSettingLauncher, backLocationLauncher)
     val installPackageLauncher = installPackageLauncher()
     return registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { resultMap ->
@@ -108,7 +108,7 @@ fun ActivityResultCaller.registerForPermissionsResult(
             }
         } else {
             // 没有false说明授权通过
-            onAllGranted?.let { it -> it() }
+            onAllGranted?.let { it -> it(resultMap.keys.toList()) }
         }
     }
 }
@@ -144,11 +144,11 @@ fun ActivityResultCaller.fineLocationLauncher(
  * */
 fun ActivityResultCaller.backLocationLauncher(
     appSettingLauncher: ActivityResultLauncher<Unit>,
-    callback: (() -> Unit)? = null
+    callback: ((String) -> Unit)? = null
 ) = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
     if (it) {
         "Request Permission ACCESS_BACKGROUND_LOCATION Success".logD()
-        callback?.let { it() }
+        callback?.let { it(ACCESS_BACKGROUND_LOCATION) }
     } else {
         "Use refuse Permission ACCESS_BACKGROUND_LOCATION".logD()
         context().genDefaultDialog(
@@ -239,6 +239,7 @@ class LaunchInstallPackageContract : ActivityResultContract<Unit, Unit>() {
      * 特殊权限过滤
      * */
     fun ActivityResultLauncher<String>.launchX(permissionStr: String) {
+        "Request Permission：${permissionStr}".logD()
         // 针对后台权限的特殊处理
         if (permissionStr == ACCESS_BACKGROUND_LOCATION) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
@@ -259,6 +260,7 @@ class LaunchInstallPackageContract : ActivityResultContract<Unit, Unit>() {
      * 特殊权限过滤
      * */
     fun ActivityResultLauncher<Array<String>>.launchX(permissionsArray: Array<String>) {
+        "Request Permissions：${permissionsArray}".logD()
         // 转化为集合去重
         val permissionsSet = permissionsArray.toMutableSet()
         // 针对后台权限的特殊处理

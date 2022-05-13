@@ -22,7 +22,7 @@ import kotlin.jvm.functions.Function0;
 public class JavaTestActivity extends AppCompatActivity {
     ActivityResultLauncher<String> launcher = CpPermissionKt.registerForPermissionResult(
             this,
-            () -> {
+            (permission) -> {
                 Log.e("Test", "授权成功");
                 return null;
             }, (scope, permission) -> {

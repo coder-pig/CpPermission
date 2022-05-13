@@ -35,6 +35,13 @@
             android:text="打开CpPermission测试Activity"
             android:onClick="@{clickListener::showCpTestPermissionAct}"/>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_cp_test_base_act"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="打开TestBaseActivity"
+            android:onClick="@{clickListener::showCpTestBaseAct}"/>
+
 
     </LinearLayout>
 </layout>

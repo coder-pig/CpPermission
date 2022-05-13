@@ -58,6 +58,7 @@
         <activity android:name=".OldRequestPermissionActivity" android:exported="true"/>
         <activity android:name=".NewRequestPermissionActivity" android:exported="true"/>
         <activity android:name=".TestCpPermissionActivity" android:exported="true"/>
+        <activity android:name=".TestBaseActivity" android:exported="true"/>
     </application>
 
 </manifest>

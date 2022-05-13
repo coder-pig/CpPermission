@@ -35,4 +35,8 @@ class ClickHandler {
     fun showCpTestPermissionAct(v: View) {
         v.context.let { it.startActivity(Intent(it, TestCpPermissionActivity::class.java)) }
     }
+
+    fun showCpTestBaseAct(v: View) {
+        v.context.let { it.startActivity(Intent(it, TestBaseActivity::class.java)) }
+    }
 }
